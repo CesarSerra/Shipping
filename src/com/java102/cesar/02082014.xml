@@ -1,0 +1,42 @@
+<?xml version="1./" encoding="UTF-8"?>
+<People>
+    <Person ID="1000">
+        <FirstName>Matt</FirstName>
+        <LastName>Johns</LastName>
+        <Address>4800 168th St. SW</Address>
+        <City>Lynnwood</City>
+		<State>WA</State>
+		<Zip>98037</Zip>
+		<Date>02/08/2014</Date>
+		<Time>13:15</Time></Person>
+    <Person ID="1001">
+    	<FirstName>Ronnie</FirstName>
+    	<LastName>Pusky</LastName>
+    	<Address>1648 178th St. S</Address>
+    	<City>Edmonds</City>
+    	<State>WA</State>
+    	<Zip>98020</Zip>
+    	<Date>02/08/2014</Date>
+    	<Time>02:18</Time>
+    </Person>
+    <Person ID="1002">
+    	<FirstName>John</FirstName>
+    	<LastName>Smith</LastName>
+    	<Address>2804 114th St. SW</Address>
+    	<City>Lynnwood</City>
+    	<State>WA</State>
+    	<Zip>98037</Zip>
+    	<Date>02/08/2014</Date>
+    	<Time>15:39</Time>
+    </Person>
+    <Person ID="1003">
+    	<FirstName>Jane</FirstName>
+    	<LastName>Yony</LastName>
+    	<Address>1245 123th St. SW</Address>
+    	<City>Lynnwood</City>
+    	<State>WA</State>
+    	<Zip>98037</Zip>
+    	<Date>02/08/2014</Date>
+    	<Time>20:18</Time>
+    </Person>
+</People>
