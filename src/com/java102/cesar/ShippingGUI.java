@@ -1,6 +1,7 @@
 package com.java102.cesar;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import java.awt.event.KeyEvent;
@@ -41,6 +43,10 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class ShippingGUI extends JFrame 
 {
@@ -53,7 +59,12 @@ public class ShippingGUI extends JFrame
 	private JTextField timeJTextField;
 	
 	private String FILENAME;
-
+	private ArrayList<Parcel> parcels = null;
+	
+	final Random random = new Random();
+	final int millisInDay = 24*60*60*1000;
+	private static final String FORMAT = "%02d:%02d:%02d";
+	Time time = new Time((long)random.nextInt(millisInDay));
 	public static void main(String[] args) 
 	{
 		EventQueue.invokeLater(new Runnable() 
@@ -72,7 +83,15 @@ public class ShippingGUI extends JFrame
 		});
 	}
 
-
+	public static String parseTime(long milliseconds) 
+	{
+	      return String.format(FORMAT,
+	              TimeUnit.MILLISECONDS.toHours(milliseconds),
+	              TimeUnit.MILLISECONDS.toMinutes(milliseconds) - TimeUnit.HOURS.toMinutes(
+	              TimeUnit.MILLISECONDS.toHours(milliseconds)),
+	              TimeUnit.MILLISECONDS.toSeconds(milliseconds) - TimeUnit.MINUTES.toSeconds(
+	              TimeUnit.MILLISECONDS.toMinutes(milliseconds)));
+	}
 	public ShippingGUI() 
 	{
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Elliott\\Documents\\Java102\\Shipping Hub\\src\\com\\java102\\cesar\\shipping.png"));
@@ -90,7 +109,8 @@ public class ShippingGUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				JFileChooser chooser = new JFileChooser("F:");
+				Component frame = null;
+				JFileChooser chooser = new JFileChooser("Shipping//src//Files");
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				        "XML File", "XML", "XML");
 				chooser.setFileFilter(filter);
@@ -99,18 +119,25 @@ public class ShippingGUI extends JFrame
 				if(returnVal == JFileChooser.APPROVE_OPTION) 
 				{
 					chosenFile = chooser.getSelectedFile();
-					readFromXML(chosenFile);
+					parcels = ReadXML.readFromXML(chosenFile.toString());
 				}  
 				if(returnVal == JFileChooser.CANCEL_OPTION)
 				{
 					chosenFile = null;
+					JOptionPane.showMessageDialog(frame,
+						    "File could not be found.",
+						    "File Error",
+						    JOptionPane.WARNING_MESSAGE);
 				}
-			}
-
-			private void readFromXML(File chosenFile) 
-			{
 				
-				
+				idJTextField.setText(Integer.toString(parcels.get(0).getID()));
+				nameJTextField.setText(parcels.get(0).getPerson().getName());
+				addressJTextField.setText(parcels.get(0).getPerson().getAddress().getAddress());
+				cityJTextField.setText(parcels.get(0).getPerson().getAddress().getCity());
+				stateJTextField.setText(parcels.get(0).getPerson().getAddress().getState());
+				zipJTextField.setText(parcels.get(0).getPerson().getAddress().getZip());
+				timeJTextField.setText(parcels.get(0).getPerson().getDate() + " " + parcels.get(0).getTime());
+	
 			}
 		});
 		mntmOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
@@ -266,6 +293,13 @@ public class ShippingGUI extends JFrame
 		buttonJPanel.setLayout(new GridLayout(0, 6, 0, 0));
 		
 		JButton scanJButton = new JButton("Scan New");
+		scanJButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+			}
+		});
 		scanJButton.setMnemonic('s');
 		buttonJPanel.add(scanJButton);
 		

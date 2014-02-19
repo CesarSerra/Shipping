@@ -21,6 +21,7 @@ public class Person
 		setFirstName(first);
 		setLastName(last);
 		setAddress(address);
+		setDate(date);
 	}
 
 	/**
@@ -117,9 +118,8 @@ public class Person
 				&& address_.equals(otherPerson.getAddress());
 	}
 	
-	public String toString() 
+	public String getName() 
 	{
-		return firstName_ + " " + lastName_
-				+ "\n" + address_.toString();
+		return firstName_ + " " + lastName_;
 	}
 }
