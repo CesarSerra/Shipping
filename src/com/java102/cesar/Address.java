@@ -85,22 +85,5 @@ public class Address {
 		}
 		return true;
 	}
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof Address)) {
-			return false;
-		}
-		
-		Address otherAddress = (Address) other;
-		return address_.equalsIgnoreCase(otherAddress.getAddress())
-				&& city_.equalsIgnoreCase(otherAddress.getCity())
-				&& state_.equalsIgnoreCase(otherAddress.getState())
-				&& zip_.equalsIgnoreCase(otherAddress.getZip());
-		
-	}
-	
-	public String toString() 
-	{
-		return  address_ + "\n" + city_ + ", " + state_ + " " + zip_;
-	}
 
 }

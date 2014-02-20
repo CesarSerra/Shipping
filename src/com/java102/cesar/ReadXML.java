@@ -34,7 +34,7 @@ public class ReadXML
 			
 			ArrayList<Parcel> parcelList = new ArrayList<Parcel>();
 			
-			NodeList nList = doc.getElementsByTagName("Person");
+			NodeList nList = doc.getElementsByTagName("parcels");
 			for (int temp = 0; temp < nList.getLength(); temp++)
 			{
 				Node nNode = nList.item(temp);
@@ -86,7 +86,6 @@ public class ReadXML
 					}
 					
 				}
-				System.out.println(date);
 				Address newAddress = new Address(address, city, state, zip);
 				Person newPerson = new Person(firstName, lastName, date, newAddress);
 				Parcel newParcel = new Parcel(ID,time,newPerson);
@@ -162,7 +161,7 @@ public class ReadXML
 				dateElement.setTextContent(parcels.getPerson().getDate());
 				
 				Element timeElement = parcelsDoc.createElement("Time");
-				timeElement.setTextContent(Integer.toString(parcels.getID()));
+				timeElement.setTextContent((parcels.getTime()));
                 
                 
 				parcelsElement.appendChild(firstNameElement);
